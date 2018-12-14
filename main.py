@@ -13,9 +13,11 @@ app = Flask("try1")
 
 @app.route('/')
 def index():
-    return '<html><body><head>hello world</head></body></html>'
+    return '<html><body><h1>hello world again</h1></body></html>'
 
-
+@app.route('/user/<name>')
+def user(name):
+    return '<h1>nice to meet you, %s!</h1>' % name
 
 
 if __name__=="__main__":
