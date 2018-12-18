@@ -6,6 +6,7 @@ __auther__ = 'xiaoliang'
 """
 
 from flask import Flask, request, make_response, redirect, abort, render_template
+from flask_bootstrap import Bootstrap
 
 
 app = Flask("try1")
@@ -24,11 +25,19 @@ def index():
     return redirect('https://www.baidu.com')
 
 
-
 @app.route('/user/<name>')
 def user(name):
     # return '<h1>nice to meet you, %s!</h1>' % name
-    return render_template('user.html',name=name)
+    return render_template('user3.html', name=name)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def interal_server_error(e):
+    return render_template('500.html'), 500
+
 
 """
 @app.route('/user/<id>')
@@ -40,5 +49,6 @@ def get_user(id):
 """
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
+    bootstrap = Bootstrap(app)
     app.run(debug=True)
